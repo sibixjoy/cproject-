@@ -1,0 +1,133 @@
+#include<stdio.h>
+#include<conio.h>
+#define CANDIDATE_COUNT
+
+#define CANDIDATE1 "farzin "
+#define CANDIDATE2 "harris"
+#define CANDIDATE3 "adwin"
+#define CANDIDATE4 "sooraj"
+
+int votesCount1=0, votesCount2=0, votesCount3=0, votesCount4=0, spoiledtvotes=0;
+void castVote();
+void votesCount();
+void getLeadingCandidate();
+int flag[100]={0};                           
+int main()
+{
+int choice;
+
+
+do{
+printf("\n\n ###### Welcome to Election/Voting 2021 #####");
+printf("\n\n 1. Cast the Vote");
+printf("\n 2. Find Vote Count");
+printf("\n 3. Find leading Candidate");
+printf("\n 0. Exit");
+
+printf("\n\n Please enter your choice : ");
+scanf("%d", &choice);
+
+switch(choice)
+{
+case 1: castVote();break;
+case 2: votesCount();break;
+case 3: getLeadingCandidate();break;
+default: printf("\n Error: Invalid Choice");
+}
+}while(choice!=0);
+
+//hold the screen
+getch();
+return 0;
+}
+void castVote()
+{
+    char a[100][20]={"THAUBVD001","THAUBVD002","THAUBVD003","THAUBVD004","THAUBVD005","THAUBVD006","THAUBVD007","THAUBVD008","THAUBVD009","THAUBVD010","THAUBVD011","THAUBVD012","THAUBVD013","THAUBVD014","THAUBVD015","THAUBVD016","THAUBVD017","THAUBVD018","THAUBVD019","THAUBVD0020","THAUBVD021","THAUBVD022","THAUBVD023","THAUBVD024","THAUBVD025","THAUBVD026","THAUBVD027","THAUBVD028","THAUBVD029","THAUBVD031","THAUBVD032","THAUBVD033","THAUBVD034","THAUBVD035","THAUBVD036","THAUBVD037","THAUBVD038","THAUBVD039","THAUBVD040","THAUBVD041","THAUBVD042","THAUBVD043","THAUBVD044","THAUBVD045","THAUBVD046","THAUBVD047"};
+    int i;
+    char reg[20];
+    int in=-1,pos;
+    printf("enter the Register number (use capital letter):");
+    scanf("%s",reg); //gets(reg);
+    for(i=0;i<47;i++)
+    {
+        if(strcmp(a[i],reg)==1){
+            pos=i;
+            in=0;
+        }
+    }
+    if(in==-1)
+    {   printf("the register number is not registered");
+    }
+    else
+    {
+        int choice;
+        if(flag[pos]==0)
+        {
+            printf("\n\n ### Please choose your Candidate ####\n\n");
+            printf("\n 1. %s", CANDIDATE1);
+            printf("\n 2. %s", CANDIDATE2);
+            printf("\n 3. %s", CANDIDATE3);
+            printf("\n 4. %s", CANDIDATE4);
+            printf("\n 5. %s", "None of These");
+
+            printf("\n\n Input your choice (1 - 4) : ");
+            scanf("%d",&choice);
+
+            switch(choice){
+                case 1: votesCount1++; break;
+                case 2: votesCount2++; break;
+                case 3: votesCount3++; break;
+                case 4: votesCount4++; break;
+                case 5: spoiledtvotes++; break;
+                default: printf("\n Error: Wrong Choice !! Please retry");
+            }
+         //hold the screen
+//getch();
+            in=-1;
+            flag[pos]=1;
+            printf("thanks for vote");
+        }
+
+        else{
+            printf("you are already done");
+        }
+    }
+
+}
+void votesCount(){int passcode;
+    printf("enter the passcode");
+    scanf("%d",&passcode);
+    if(passcode==1234){
+printf("\n\n ##### Voting Statics ####");
+printf("\n %s - %d ", CANDIDATE1, votesCount1);
+printf("\n %s - %d ", CANDIDATE2, votesCount2);
+printf("\n %s - %d ", CANDIDATE3, votesCount3);
+printf("\n %s - %d ", CANDIDATE4, votesCount4);
+printf("\n %s - %d ", "Spoiled Votes", spoiledtvotes);}
+else{
+printf("wrong passcode");
+}
+}
+
+void getLeadingCandidate(){
+    int passcode;
+     printf("enter the passcode");
+     scanf("%d",&passcode);
+        if(passcode==1234){
+    printf("\n\n  #### Leading Candiate ####\n\n");
+        if(votesCount1>votesCount2 && votesCount1>votesCount3 && votesCount1 >votesCount4)
+    printf("[%s]",CANDIDATE1);
+        else if (votesCount2>votesCount3 && votesCount2>votesCount4 && votesCount2 >votesCount1)
+    printf("[%s]",CANDIDATE2);
+        else if(votesCount3>votesCount4 && votesCount3>votesCount2 && votesCount3 >votesCount1)
+    printf("[%s]",CANDIDATE3);
+        else if(votesCount4>votesCount1 && votesCount4>votesCount2 && votesCount4 >votesCount3)
+    printf("[%s]",CANDIDATE4);
+        else
+    printf("----- Warning !!! No-win situation----"); }
+        else
+    {printf("wrong passcode");}
+
+
+
+}
